@@ -24,21 +24,31 @@ const FILES_TO_CACHE =[
 self.addEventListener('install', function(e){
     e.waitUntil(
         caches.open("CACHE_NAME").then(function(cache){
-        console.log('installing the CACHE:'+ CACHE_NAME);
-        return cache.addAll(FILES_TO_CACHE);
+            console.log('installing the CACHE:'+ CACHE_NAME);
+            return cache.addAll(FILES_TO_CACHE);
         })
     );
 });
 
 //fetch request
-self.addEventListener("fecth", function(e){
+self.addEventListener("fetch", function(e){
     console.log("fetch request:"+ e.request.url);
-    e.respondWidth(
+    e.respondWith(
         caches.match(e.request).then(function (request){
-            return request || fetch(e.request);
+            if (request){
+                //if cache is available
+                console.log("responding to cache:" + e.request.url);
+                return request;
+            }else{
+                console.log("file is not cached" + e.request.url);
+                return fetch(e.request);
+            }
+
         })
     );
 });
+
+
 
 //activating the service worker and removind old data.
 self.addEventListener("activate", function(e){
@@ -53,7 +63,7 @@ self.addEventListener("activate", function(e){
             return Promise.all(
                 keylist.map(function(key,i){
                     if (cacheKeeplist.indexOf(key)===-1){
-                        console.log("deleting cache:"+keylist[i]);
+                        console.log("deleting cache: " +keylist[i]);
                         return caches.delete(keylist[i]);
                     }
                 })
@@ -61,3 +71,6 @@ self.addEventListener("activate", function(e){
         })
     );
 });
+
+
+
