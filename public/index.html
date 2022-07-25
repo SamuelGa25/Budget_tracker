@@ -53,18 +53,4 @@
 
 </body>
 
-<!-- for an instance execution, it register the service worker! -->
-<script type = "text/javascript">
-
-  (function(){
-    if("serviceWorker" in navigator){
-      //registering the service worker
-      navigator.serviceWorker.register("./service-worker.js")
-      .then(()=> console.log("Registration complete!"))
-      .catch(error => console.log("Registratoin failed!"));
-    }
-  })
-
-</script>
-
 </html>

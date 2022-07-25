@@ -14,8 +14,16 @@
   ## Built With
   JavaScript, express.js, mongoDB, mongoose
 
+  ## Mock-Up 
+  <img width="1378" alt="Screen Shot 2022-07-25 at 5 49 54 AM" src="https://user-images.githubusercontent.com/100814742/180749466-5f46e680-078e-4eb2-9412-5a754b197471.png">
+
+
   ## Deployed Website
+  heroku:
   https://morning-oasis-14118.herokuapp.com/
+
+ 
+
   
   ## Contribution 
   Samuel Garcia
