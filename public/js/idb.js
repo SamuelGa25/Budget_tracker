@@ -7,26 +7,26 @@ let db;
 const request = indexedDB.open('budget_tracker',1);
 
 //emitting if the database version changes
-request.onupgradeneeded = function(event){
+request.onupgradeneeded = function(e){
     //saving a reference to the database. 
-    const db = event.target.result;
+    const db = e.target.result;
 
     db.createObjectStore('new_budget', {autoIncrement: true});
 
 };
 //requesting on success
-request.onsuccess = function(event){
-    db = event.target.result;
+request.onsuccess = function(e){
+    db = e.target.result;
 
     //checking if the app is online
     if (navigator.onLine){
-        submitBudget();
+        uploadBudget();
     }
 };
 //in case of an error
-request.onerror = function(event){
+request.onerror = function(e){
     //checking the error
-    console.log(event.target.errorCode);
+    console.log(e.target.errorCode);
 
 };
 
@@ -43,7 +43,7 @@ let saveRecord = (record) => {
 
 };
 
-let submitBudget = () => {
+function uploadBudget() {
     //opening transaction on db 
     const transaction = db.transaction(["new_budget"], "readwrite");
 
@@ -87,7 +87,7 @@ let submitBudget = () => {
 
 }
 //when coming back online 
-window.addEventListener("online", submitBudget);
+window.addEventListener("online", uploadBudget);
 
 
 
