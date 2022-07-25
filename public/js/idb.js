@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 //db connection
 let db;
 
@@ -36,10 +34,10 @@ let saveRecord = (record) => {
     const transaction = db.transaction(["new_budget"], "readwrite");
 
     //accessing 
-    const objectStore = transaction.objectStore("new_budget");
+    const budgetObjectStore = transaction.objectStore("new_budget");
 
     //add record to your store with add method
-    objectStore.add(record); 
+    budgetObjectStore.add(record); 
 
 };
 
@@ -48,10 +46,10 @@ function uploadBudget() {
     const transaction = db.transaction(["new_budget"], "readwrite");
 
     //accessing 
-    const objectStore = transaction.objectStore("new_budget");
+    const budgetObjectStore = transaction.objectStore("new_budget");
 
     //getting the record
-    const getAll = objectStore.getAll();
+    const getAll = budgetObjectStore.getAll();
 
     //if succesfully did it
     getAll.onsuccess = function () {
@@ -73,9 +71,9 @@ function uploadBudget() {
                 //opening new transaction
                 const transaction = db.transaction(["new_budget"], "readwrite");
                 //accessing 
-                const objectStore = transaction.objectStore("new_budget");
+                const budgetObjectStore = transaction.objectStore("new_budget");
                 //clearing items
-                objectStore.clear();
+                budgetObjectStore.clear();
                 
                 alert("Transaction have been successfull! =)")
             })

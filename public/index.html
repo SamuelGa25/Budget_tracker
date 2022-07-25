@@ -7,6 +7,9 @@
   <meta name="theme-color" content="#317EFB">
   <link rel="shortcut icon" href="icons/icon-192x192.png" type="image/x-icon">
 
+  <!-- Link for manifest -->
+  <link rel="manifest" href= "manifest.json">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/styles.css">
 
@@ -42,6 +45,26 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <!-- LINK for indexedDB -->
+  <script src="./js/idb.js"></script>
+
   <script src="js/index.js"></script>
+
 </body>
+
+<!-- for an instance execution, it register the service worker! -->
+<script type = "text/javascript">
+
+  (function(){
+    if("serviceWorker" in navigator){
+      //registering the service worker
+      navigator.serviceWorker.register("./service-worker.js")
+      .then(()=> console.log("Registration complete!"))
+      .catch(error => console.log("Registratoin failed!"));
+    }
+  })
+
+</script>
+
 </html>
