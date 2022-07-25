@@ -12,6 +12,7 @@ request.onupgradeneeded = function(event){
     const db = event.target.result;
 
     db.createObjectStore('new_budget', {autoIncrement: true});
+
 };
 //requesting on success
 request.onsuccess = function(event){
@@ -30,7 +31,7 @@ request.onerror = function(event){
 };
 
 //new transaction with no internet function.
-let newRecord = (record) => {
+let saveRecord = (record) => {
     //opne new transaction
     const transaction = db.transaction(["new_budget"], "readwrite");
 
